@@ -1,0 +1,28 @@
+use_debug false
+use_synth :fm
+use_bpm 70
+
+define :arpeggiate do |prog, tonic, mode=:major, pattern=[0, 1, 2, 3], reps=2|
+  sc = scale(tonic, mode, num_octaves: 4)
+  prog.each do |deg|
+    puts "prog", prog
+    reps.times do
+      with_synth :growl do
+        play sc[deg-1] - 12, sustain: 0.9, amp: 2
+      end
+      t = 1.0 / pattern.length
+      pattern.each do |i|
+        n = sc[deg - 1 + 2*i + (i+1) / 4]
+        #puts "n", n
+        play n, sustain: 1.5 * t, amp: 0.8
+        sleep t
+      end
+    end
+  end
+end
+
+with_fx :reverb do
+  # pachelbel
+  2.times { arpeggiate [7,4,5,2,3,7,3,4], :c4, :dorian, [0,1,2,3,2,1] }
+  arpeggiate [7], :c4, :dorian, [0,1,2,3], 1
+end
