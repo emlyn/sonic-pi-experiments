@@ -1,0 +1,86 @@
+# Attempt at a MML parser and player in Sonic Pi
+
+define :music do |txt, vol_scale=100|
+  octave = 5
+  length = 4
+  use_bpm 120
+  txt = txt.downcase.gsub(/^mml@| |;$/, '').gsub(/#/, '+').gsub(/w/, 'r')
+  while not txt.empty?
+    r = txt.scan(/^(.)([+-]?)(\d*)(\.?)(.*)$/)
+    cmd, opt, num, dot, txt = r[0]
+    #print cmd, opt, num
+    case cmd
+    when 'o'
+      if not num.empty? then
+        octave = num.to_i
+      end
+    when 'l'
+      if not num.empty? then
+        length = num.to_i
+      end
+    when 't'
+      if not num.empty? then
+        use_bpm num.to_i
+      end
+    when 'v'
+      if not num.empty? then
+        set_volume! num.to_f / vol_scale
+      end
+    when '>'
+      octave += 1
+    when '<'
+      octave -= 1
+    when 'a'..'g', 'r'
+      a = if opt == '+' then 's' elsif opt == '-' then 'b' else '' end
+      n = cmd
+      if n != 'r' then
+        n += a + octave.to_s
+      end
+      t = (if dot.empty? then 4.0 else 6.0 end) / (if num.empty? then length else num.to_i end)
+      loop do
+        r = txt.scan(/^(\^|&[a-gr][+-]?)(\d*)(\.?)(.*)$/)
+        if r.empty? then break end
+        cmd, num, dot, txt = r[0]
+        t += (if dot.empty? then 4.0 else 6.0 end) / (if num.empty? then length else num.to_i end)
+      end
+      play_pattern_timed [n.to_sym], [t], release: t
+    else
+      print "Unrecognised:", cmd + opt + num + dot
+    end
+  end
+end
+
+use_debug false
+use_synth :pulse
+use_synth_defaults release: 0.3, mod_rate: 5, amp: 0.6
+
+define :tetris do
+  in_thread do
+    music('o6E<l8B>CD4C<B8A4A>CE4DC<B4.>Cl4DEC<AA2l8R>D4FA4GFE4.CE4DC<B4B>Cl4DEC<AA2')
+  end
+  music('l8o3E>E<E>E<E>E<E>E<A>A<A>A<A>A<A>A<G+>G+<G+>G+<E>E<E>E<A>A<A>A<A>A<B>CD>D<D>D<D>D<C>C<C>C<C>C<C>C<<G+>G+<G+>G+<G+>G+<G+>G+')
+end
+
+define :mario do
+  music('t105>e16e8e8c16e8g2c8.<g8.e8.a8b8a+16a8g16.>e16g16.a8f16g8e8c16d16<b8.>c8.<g8.e8.a8b8a+16a8g16.>e16g16.a8f16g8e8c16d16<b4&b16>g16f+16f16d+8e8<g+16a16>c8<a16>c16d8.g16f+16f16d+8e8>c8c16c4.<g16f+16f16d+8e8<g+16a16>c8<a16>c16d8.d+8.d8.c2&c8g16f+16f16d+8e8<g+16a16>c8<a16>c16d8.g16f+16f16d+8e8>c8c16c4.<g16f+16f16d+8e8<g+16a16>c8<a16>c16d8.d+8.d8.c2c16c8c8c16d8e16c8<a16g4>c16c8c8c16d16e2&e16c16c8c8c16d8e16c8<a16g4>e16e8e8c16e8g2c8.<g8.e8.a8b8a+16a8g16.>e16g16.a8f16g8e8c16d16<b8.>c8.<g8.e8.a8b8a+16a8g16.>e16g16.a8f16g8e8c16d16<b8.>e16c8<g8.g+8a16>f8f16<a4b16.>a16a16.a16.g16f16.e16c8<a16g4>e16c8<g8.g+8a16>f8f16<a4b16>f8f16f16.e16d16.c2e16c8<g8.g+8a16>f8f16<a4b16.>a16a16.a16.g16f16.e16c8<a16g4>e16c8<g8.g+8a16>f8f16<a4b16>f8f16f16.e16d16.c2c16c8c8c16d8e16c8<a16g4>c16c8c8c16d16e2&e16c16c8c8c16d8e16c8<a16g4>e16e8e8c16e8g2e16c8<g8.g+8a16>f8f16<a4b16.>a16a16.a16.g16f16.e16c8<a16g4>e16c8<g8.g+8a16>f8f16<a4b16>f8f16f16.e16d16.c3')
+end
+
+define :cantina do
+  in_thread do
+    music('v120t250a4>d4<a4>d4<a8>d4<a4g+8a4a8g+8a8g4f+8g8f+8f2d2a4>d4<a4>d4<a8>d4<a4g+8a4g4g4.f+8g4>c8<a+4a4g4.a4>d4<a4>d4<a8>d4<a4g+8a4>c4c4.<a8g4f4.d2&d8d2f2a2>c2d+4d4<g+8a4f1&f4a4f8a2&a8a4f8a2&a8a4f8g+8a4.f2d2&d8a4f8a2&a8a4f8a2&a8a4f8g+8a4.g2c2&c8a4f8a2&a8a4f8a2&a8a4f8g+8a4.f2d2<a+8>d8f4<b8>d8f4g+8a4d2&d8d8f8a+8>d8<g+8a4f1&f8f4.g+4f8g4.f8g+8f8g8f8g+4f4.g+4f8g4.f8g+8f8g8f8g+4f4.g+4f8g4.f8g+8f8g8f8g+4f8f8g+8f8g8f8g+8f8g8f8g+8f8g8f8g+8f8f2g+8f8g4.f8g+8f8g8f8g+4f4.g+4f8g4.f8g+8f8g8f8g+4f4.g+4f8g4.f8g+8f8g8f8g+4f8f8g+8f8g8g+4f1&f8t250a4>d4<a4>d4<a8>d4<a4g+8a4a8g+8a8g4f+8g8f+8f2d2a4>d4<a4>d4<a8>d4<a4g+8a4g4g4.f+8g4>c8<a+4a4g4.a4>d4<a4>d4<a8>d4<a4g+8a4>c4c4.<a8g4f4.d2&d8<a+8>d8f4<b8>d8f4g+8a4d2&d8d8f8a+8>d8<g+8a4f2&f8>f2')
+  end
+  in_thread do
+    music('v120t250<<a4>d4<a4>d4<a8>d4<a4g+8a4a8g+8a8g4f+8g8f+8f2d2a4>d4<a4>d4<a8>d4<a4g+8a4>d4d4.c+8d4d8<a+4a4g4.a4>d4<a4>d4<a8>d4<a4g+8a4g4g4.e8e4f4.d2&d8d2d2f2a2a+4a4e8e4f1&f4>f4d8f2&f8f4d8f2&f8f4d8e8f4.d2<a2&a8>f4d8f2&f8f4d8f2&f8f4d8e8f4.d2<g2&g8>f4d8f2&f8f4d8f2&f8f4d8e8f4.d2<a2a+8>d8d4<b8>d8d4e8f4<a2&a8d8f8a+8>d8<g+8a4f1&f8>d4.f4d8e4.d8f8d8e8d8f4d4.f4d8e4.d8f8d8e8d8f4d4.f4d8e4.d8f8d8e8d8f4d8d8f8d8e8d8f8d8e8d8f8d8e8d8f8d8d4.f4d8e4.d8f8d8e8d8f4d4.f4d8e4.d8f8d8e8d8f4d4.f4d8e4.d8f8d8e8d8f4d8d8f8d8e8f4d1&d8<a4>d4<a4>d4<a8>d4<a4g+8a4a8g+8a8g4f+8g8f+8f2d2a4>d4<a4>d4<a8>d4<a4g+8a4>d4d4.c+8d4d8<a+4a4g4.a4>d4<a4>d4<a8>d4<a4g+8a4g4g4.e8e4f4.d2&d8a+8>d8d4<b8>d8d4e8f4<a2&a8d8f8a+8>d8<g+8a4f2&f8>f2')
+  end
+  music('v120t250<d2<a2>d2<a2>d2c2f2<d2>d2<a2>d2<a2g2g2>c8<a+4a4g4.>d2<a2>d2<a2>e4e4.c8c4<f4.d2&d8a+2a+2>c2f+2d+4d4<g+8a4f4.>e4d4c4d2a2d2a2d2a2d2<a2>d2a2d2a2d2a2g2c2d2a2d2a2d2a2d2<a2a+2b2>c2c+2d2e2f4e4d4c4d4c4<a+4a4g4f4e4d4>d4c4<a+4a4g4f4e4d4>d4c4<a+4a4g4f4e4d4>d1&d1d4c4<a+4a4g4f4e4d4>d4c4<a+4a4g4f4e4d4>d4c4<a+4a4g4f4e4d4f8f8g+8f8g8g+4f1&f8>d2<a2>d2<a2>d2c2f2<d2>d2<a2>d2<a2g2g2>c8<a+4a4g4.>d2<a2>d2<a2>e4e4.c8c4<f4.d2&d8a+2b2>c2c+2d2e2f2<f2')
+end
+
+define :surprise do
+  music('MML@l16<f+g+bg+>d+8.d+8.c+4.<f+g+bg+l8.>c+c+<bl16a+g+8f+g+bg+b4>c+8<a+8.g+f+4f+8>c+8<b8b2f+g+bg+>d+4d+8c+4.<f+g+bg+>f+4<b8b8.a+g+8f+g+bg+b4>c+8<a+8.g+l4f+f+8>c+4<b1;')
+end
+
+# Uncomment one of the following lines and run:
+#tetris
+#mario
+cantina
+#surprise
