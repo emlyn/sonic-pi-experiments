@@ -1,0 +1,15 @@
+# Requires Sonic Pi 2.11+
+# Open the scope window if not already open
+# Make sure the Lissajous option is enabled in Prefs:Scope
+
+live_loop :scope do
+  use_synth_defaults attack: 0.5, sustain: 3, release: 0.5, amp: 3
+  #use_tuning [:equal, :just, :pythagorean, :meantone].choose
+  with_synth [:sine, :tri, :saw].choose do
+    play 60, pan: -1
+  end
+  with_synth [:sine, :tri, :saw].choose do
+    play [63,64,65,67,69,72].choose, pan: 1
+  end
+  sleep 3.5
+end
