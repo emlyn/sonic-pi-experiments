@@ -23,6 +23,6 @@ Attempt to apply vibrato to a note
 
 MML (Music Macro Language) interpreter and player, with some MML for Tetris, Mario and the Star Wars Cantina song.
 
-## [Scope](/scope.spi)
+## [Scope](/scope.spi) / [Lissajous](/lissajous.spi)
 
 Making Lissajous figures with the new scope in SP 2.11
