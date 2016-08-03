@@ -1,0 +1,14 @@
+use_random_seed 123
+
+use_synth_defaults attack: 0.1, sustain: 60, release: 0.5, amp: 3
+use_synth :sine
+n0 = 440.0
+play hz_to_midi(n0), pan: -1
+s = play hz_to_midi(n0), pan: 1, slide: 0.2
+30.times do
+  sleep 2
+  a=dice(10)
+  b=dice(10)
+  puts a, b
+  control s, note: hz_to_midi(n0 * a / b)
+end
