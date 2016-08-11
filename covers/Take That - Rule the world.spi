@@ -1,0 +1,313 @@
+use_debug false
+use_bpm 82
+
+at 0 do
+  # vocals
+  use_synth :fm
+  use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5
+  with_fx :reverb do
+    puts "You light"
+    play :Fs3, release: 0.5
+    sleep 0.5
+    play :B3, release: 3.5
+    sleep 3.5
+    puts "the skies"
+    play :Fs3, release: 0.5
+    sleep 0.5
+    play :Cs4, release: 2.5
+    sleep 2.5
+    puts "up above me;"
+    play :Fs3
+    sleep 1
+    play :A3, release: 0.5
+    sleep 0.5
+    n = play :Fs3, release: 1
+    at 0.125 do
+      control n, note: :E3
+    end
+    sleep 1
+    play :E3, release: 1.5
+    sleep 1.5
+    sleep 2.5
+    sleep 3
+    puts "a star"
+    play :Fs3, release: 0.5
+    sleep 0.5
+    play :B3, release: 3.5
+    sleep 3.5
+    puts "so bright"
+    play :D4, release: 0.5
+    sleep 0.5
+    play :E4, release: 3.5
+    sleep 3.5
+    puts "you blind me,"
+    play :D4, release: 0.5
+    sleep 0.5
+    n = play :Cs4, release: 1
+    at 0.1875 do
+      control n, note: :B3
+    end
+    sleep 1
+    play :B3, release: 3
+    sleep 3
+    puts "yeah, yeah."
+    n = play :A3, release: 2.5
+    at 0.325 do
+      control n, note: :B3
+    end
+    at 0.5 do
+      control n, note: :Fs3
+    end
+    sleep 2
+    sleep 1
+    puts "Don't close"
+    play :B3, release: 0.5
+    sleep 0.5
+    play :E4, release: 3.5
+    sleep 3.5
+    puts "your eyes;"
+    play :B3, release: 0.5
+    sleep 0.5
+    play :D4, release: 2
+    sleep 2
+    puts "don't fade away,"
+    play :B3, release: 0.5
+    sleep 0.5
+    n = play :G4
+    sleep 0.5
+    control n, note: :Fs4
+    sleep 0.5
+    play :Fs4, release: 0.5
+    sleep 0.5
+    play :Cs4, release: 2
+    sleep 2
+    puts "don't fade away,"
+    play :B3, release: 0.5
+    sleep 0.5
+    n = play :G4
+    sleep 0.5
+    control n, note: :Fs4
+    sleep 0.5
+    play :Fs4, release: 0.5
+    sleep 0.5
+    play :E4, release: 1.5
+    sleep 1.5
+    sleep 0.5
+    puts "oh."
+    n = play :G4, release: 2.5
+    sleep 1
+    control n, note: :Fs4
+    sleep 1.5
+    sleep 0.5
+    puts "Yeah, you and me, we can ride on a star;"
+    6.times do
+      play :Fs4, release: 0.5
+      sleep 0.5
+    end
+    play :Fs4
+    sleep 1
+    play :G4, release: 0.5
+    sleep 0.5
+    play :Fs4, release: 0.5
+    sleep 0.5
+    play :Cs4
+    sleep 1
+    puts "if you stay with me, girl,"
+    play :Cs4, release: 0.5
+    sleep 0.5
+    play :Cs4, release: 0.5
+    sleep 0.5
+    play :Cs4
+    sleep 1
+    play :D, release: 0.5
+    sleep 0.5
+    play :Cs4, release: 0.5
+    sleep 0.5
+    play :B3
+    sleep 1
+    puts "we can rule the world."
+    play :Fs4, release: 0.5
+    sleep 0.5
+    play :Fs4, release: 0.5
+    sleep 0.5
+    n = play :Fs4
+    sleep 0.5
+    control n, note: :E4
+    sleep 0.5
+    play :E4
+    sleep 1
+    n = play :G4, release: 2.5
+    sleep 1
+    control n, note: :Fs4
+    sleep 1.5
+    sleep 0.5
+    puts "Yeah, you and me, we can light up the sky;"
+    6.times do
+      play :Fs4, release: 0.5
+      sleep 0.5
+    end
+    play :Fs4
+    sleep 1
+    play :G4, release: 0.5
+    sleep 0.5
+    play :Fs4, release: 0.5
+    sleep 0.5
+    play :Cs4
+    sleep 1
+    puts "if you stay by my side,"
+    play :Cs4, release: 0.5
+    sleep 0.5
+    play :Cs4, release: 0.5
+    sleep 0.5
+    play :Cs4
+    sleep 1
+    play :D, release: 0.5
+    sleep 0.5
+    play :Cs4, release: 0.5
+    sleep 0.5
+    play :B3
+    sleep 1
+    puts "we can rule the world."
+    play :Fs4, release: 0.5
+    sleep 0.5
+    play :Fs4, release: 0.5
+    sleep 0.5
+    n = play :Fs4
+    sleep 0.5
+    control n, note: :E4
+    sleep 0.5
+    play :E4
+    sleep 1
+    n = play :G4, release: 1.5
+    sleep 1
+    control n, note: :Fs4
+    sleep 0.5
+  end
+end
+
+at 1 do
+  # left hand
+  use_synth :piano
+  use_synth_defaults pan: -1
+  with_fx :reverb do
+    [:B2, :Fs2, :E2, :Fs2, :B2, :Fs2, :E2, :Fs2].each do |n|
+      play n, sustain: 4
+      sleep 4
+    end
+    play :E2, sustain: 3
+    sleep 3
+    play :Fs2, sustain: 1
+    sleep 1
+    play :B1, sustain: 2
+    sleep 2
+    play :B1, sustain: 1
+    sleep 1
+    play :Cs2, sustain: 1
+    sleep 1
+    with_fx :level, amp: 0.4 do
+      8.times do
+        play :Fs1, sustain: 0.5
+        sleep 0.5
+      end
+      8.times do
+        play :A1, sustain: 0.5
+        sleep 0.5
+      end
+      8.times do
+        play :D2, sustain: 0.5
+        sleep 0.5
+      end
+      3.times do
+        play :B1, sustain: 0.5
+        sleep 0.5
+      end
+      play :Fs1, sustain: 1
+      sleep 1
+      3.times do
+        play :Fs1, sustain: 0.5
+        sleep 0.5
+      end
+      3.times do
+        play :Fs1, sustain: 0.5
+        sleep 0.5
+      end
+      play :G1, sustain: 1
+      sleep 1
+      3.times do
+        play :G1, sustain: 0.5
+        sleep 0.5
+      end
+      3.times do
+        play :G1, sustain: 0.5
+        sleep 0.5
+      end
+      play :A1, sustain: 1
+      sleep 1
+      3.times do
+        play :A1, sustain: 0.5
+        sleep 0.5
+      end
+      8.times do
+        play :D2, sustain: 0.5
+        sleep 0.5
+      end
+    end
+  end
+end
+
+at 1 do
+  # right hand
+  use_synth :piano
+  use_synth_defaults sustain: 1
+  with_fx :reverb do
+    2.times do
+      # Bsus2/Bm
+      play_pattern [[:Fs3, :Cs4], [:Fs3, :D4], [:Fs3, :Cs4], [:Fs3, :D4]]
+      # F#m
+      play_pattern [[:Cs4, :G4],  [:A3, :Fs4], [:Fs3, :Cs4], [:Cs3, :A3]]
+      # Em
+      play_pattern [[:E3, :B3],   [:B2, :G4],  [:E3, :B3],   [:B2, :G3]]
+      # F#m
+      play_pattern [[:Fs3, :Cs4], [:D3, :B3],  [:Fs3, :Cs4], [:D3, :B3]]
+    end
+    # Em
+    play_pattern [[:E3, :B3],   [:B2, :G4],  [:E3, :B3],   [:B2, :G3]]
+    # Bm
+    play_pattern [[:Fs3, :D4],  [:D3, :B3],  [:Fs3, :D4],  [:D3, :B3]]
+    # F#m (2)
+    play_pattern [[:Fs3, :Cs4], [:Cs3, :A3], [:Fs3, :Cs4], [:Cs3, :A3]]
+    # A
+    play_pattern [[:E3, :Cs4],  [:Cs3, :A3], [:E3, :Cs4],  [:Cs3, :A3]]
+    2.times do
+      # D
+      play_pattern [(chord :D3, :M)]*4
+      # Bm/F#m
+      play (chord :B3, :m)
+      sleep 1
+      play (chord :B3, :m), sustain: 0.5
+      sleep 0.5
+      play (chord :Fs3, :m), sustain: 1.5
+      sleep 1.5
+      play (chord :Fs3, :m)
+      sleep 1
+      # F#m/G
+      play (chord :Fs3, :m)
+      sleep 1
+      play (chord :Fs3, :m), sustain: 0.5
+      sleep 0.5
+      play (chord :G3, :M), sustain: 1.5
+      sleep 1.5
+      play (chord :G3, :M)
+      sleep 1
+      # G/A
+      play (chord :G3, :M)
+      sleep 1
+      play (chord :G3, :M), sustain: 0.5
+      sleep 0.5
+      play (chord :A3, :M), sustain: 1.5
+      sleep 1.5
+      play (chord :A3, :M)
+      sleep 1
+    end
+  end
+end
