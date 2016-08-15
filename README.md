@@ -26,3 +26,7 @@ MML (Music Macro Language) interpreter and player, with some MML for Tetris, Mar
 ## [Scope](/scope.spi) / [Lissajous](/lissajous.spi)
 
 Making Lissajous figures with the new scope in SP 2.11
+
+## [Play Helper](/play-helper.spi)
+
+Make it easier to play sequences of notes/chords of varying durations
