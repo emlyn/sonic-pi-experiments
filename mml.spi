@@ -1,3 +1,4 @@
+# -*- mode: ruby;-*-
 # Attempt at a MML parser and player in Sonic Pi
 
 define :music do |txt, vol_scale=100|
