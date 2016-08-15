@@ -1,0 +1,33 @@
+# Helper for playing sequences of notes
+
+define :pl do |notes, sus=0.5, rel=nil|
+  rel ||= 1 - sus
+  notes.each_slice(2) do |n,d|
+    if d.respond_to?(:each) then # slur
+      dtot = d.reduce(:+)
+      synth = play n[0], sustain: sus * dtot, release: rel * dtot
+      sleep d[0]
+      d[1..-1].zip(n[1..-1]).each do |dd, nn|
+        control synth, note: nn
+        sleep dd
+      end
+    else
+      play n, sustain: sus * d, release: rel * d
+      sleep d
+    end
+  end
+end
+
+use_bpm 90
+
+# pass it an array with pairs of note+duration:
+pl [:C, 1, :D, 1, :E, 1, :C, 1]
+
+# you can optionally pass sustain and release values as a fraction of total duration:
+pl [:C, 1, :D, 1, :E, 1, :C, 1], 0.2, 0.2
+
+# slur notes by passing the notes and lengths inside arrays:
+pl [[:E, :F, :G], [1, 1, 2]]
+
+# you can also play chords:
+pl [[:E, :G], 1, [:F, :A], 1, chord(:G, :M), 2]
