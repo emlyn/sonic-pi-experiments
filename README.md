@@ -30,3 +30,7 @@ Making Lissajous figures with the new scope in SP 2.11
 ## [Play Helper](/play-helper.spi)
 
 Make it easier to play sequences of notes/chords of varying durations
+
+## [Covers](/covers)
+
+Covers of songs
