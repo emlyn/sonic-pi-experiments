@@ -7,9 +7,9 @@ Attribution is optional (but always welcome).
 
 Programmatically generate guitar chords and strum them.
 
-## [Drum Machine](/drum_machine.spi)
+## [Drum Machine](/drum_machine.spi) / [Sequencer](/sequencer.spi)
 
-Drum sequencer.
+Drum sequencer (first attempt, and second more general version).
 
 ## [Arpeggiator](/arpeggiator.spi)
 
