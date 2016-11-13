@@ -5,9 +5,9 @@
 # the sample. Other characters will modify the sample by appending
 # e.g. '_soft' or '_hard' to the sample name - meant to be used with
 # the builtin samples that have variants with different endings (see
-# example at end).
+# example in experiments subdirectory).
 
-define :expand do |sample, pat|
+define :seq_expand do |sample, pat|
   # Expand sample base and pattern to array of samples
   pat.split('').map do |c|
     case c
@@ -34,33 +34,10 @@ end
 
 define :seq do |parts, t=1|
   # Drum sequencer
-  parts.each_slice(2).map{|s,p| expand s,p}.transpose.each do |ss|
+  parts.each_slice(2).map{|s,p| seq_expand s,p}.transpose.each do |ss|
     ss.each do |s|
       sample s if s
     end
     sleep t
   end
 end
-
-use_bpm 110
-
-seq [:drum_cymbal,  "o...c...c...c...", # o => :drum_cymbal_open, c => :drum_cymbal_closed
-     :drum_bass,    "X.......X.X.....", # X => :drum_bass_hard, x => :drum_bass_soft
-     :drum_tom_mid, "....X.......X..."], 0.25
-
-seq [:drum_cymbal,  "c...c..."*2,
-     :drum_bass,    "X.X....."*2,
-     :drum_tom_mid, "....X..x"*2], 0.25
-
-seq [:drum_cymbal,  "c.c.c.c.c.c.c.c.",
-     :drum_bass,    "X.......X.X.....",
-     :drum_tom_mid, "....X..x....X..x"], 0.25
-
-seq [:drum_cymbal,  "o.c.c.c.c.c.c...",
-     :drum_bass,    "X.......X.X.....",
-     :drum_tom_mid, "....X..x....X..x",
-     :drum_tom_hi,  "..............x."], 0.25
-
-seq [:drum_cymbal,  "cccc.ccc"*2,
-     :drum_bass,    "x.x.x.x."*2,
-     :drum_tom_mid, "....x..."*2]*8, 0.25

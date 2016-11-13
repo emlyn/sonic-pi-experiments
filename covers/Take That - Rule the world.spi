@@ -2,23 +2,6 @@
 use_debug false
 use_bpm 82
 
-define :pl do |notes, sus=0.5|
-  notes.each_slice(2) do |n,d|
-    if d.respond_to?(:each) then # slur
-      dtot = d.reduce(:+)
-      synth = play n[0], sustain: dtot*sus, release: dtot*(1-sus)
-      sleep d[0]
-      d[1..-1].zip(n[1..-1]).each do |dd, nn|
-        control synth, note: nn
-        sleep dd
-      end
-    else
-      play n, sustain: d*sus, release: d*(1-sus)
-      sleep d
-    end
-  end
-end
-
 define :pls do |notes, sus=1|
   pl notes, sus
 end

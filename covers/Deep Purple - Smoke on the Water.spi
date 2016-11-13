@@ -1,5 +1,6 @@
 # -*- mode: ruby;-*-
 # Smoke on the Water - Deep Purple
+# Uses the play_helper and sequencer helpers
 
 use_debug false
 use_bpm 110
@@ -9,61 +10,6 @@ use_bpm 110
 define :bar do |n|
   # beat time at start of bar n
   return 4 * n
-end
-
-define :pl do |notes, sus=0.5, rel=nil|
-  # play a tune
-  rel ||= 1 - sus
-  notes.each_slice(2) do |n,d|
-    if d.respond_to?(:each) then # slur
-      dtot = d.reduce(:+)
-      synth = play n[0], sustain: sus * dtot, release: rel * dtot
-      sleep d[0]
-      d[1..-1].zip(n[1..-1]).each do |dd, nn|
-        control synth, note: nn
-        sleep dd
-      end
-    else
-      play n, sustain: sus * d, release: rel * d
-      sleep d
-    end
-  end
-end
-
-define :expand do |sample, pat|
-  # Helper for seq drum sequencer.
-  # Expands sample base and pattern to array of samples.
-  pat.split('').map do |c|
-    case c
-    when '*'
-      sample
-    when 'x', 's', 'S'
-      (sample.to_s + '_soft').to_sym
-    when 'X', 'h', 'H'
-      (sample.to_s + '_hard').to_sym
-    when 'o', 'O'
-      (sample.to_s + '_open').to_sym
-    when 'c', 'C'
-      (sample.to_s + '_closed').to_sym
-    when 'p', 'P'
-      (sample.to_s + '_pedal').to_sym
-    when '.', ' '
-      nil
-    else
-      puts 'Unknown character in sequence:', c
-      nil
-    end
-  end
-end
-
-define :seq do |parts, t=1|
-  # Drum sequencer
-  parts.each_slice(2).map{|s,p| expand s,p}.transpose.each do |ss|
-    ss.each do |s|
-      sample s if s
-    end
-    sleep t
-  end
 end
 
 #### Define the different drum beats

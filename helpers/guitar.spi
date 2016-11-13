@@ -6,19 +6,19 @@
 # Feel free to make use of this code as you like (with attribution if you feel like it, but you don't have to).
 # Thanks to @Project_Hell_CK for fixing the tuning, and spotting that it gets chord(:f, :major) not quite right.
 
-# Next note higher or equal to base note n, that is in the chord c
-define :next_note do |n, c|
-  # Make sure n is a number
-  n = note(n)
-  # Get distances to each note in chord, add smallest to base note
-  n + (c.map {|x| (note(x) - n) % 12}).min
-end
-
-ukulele = [:g, :c, :e, :a]
+ukulele_standard = [:g, :c, :e, :a]
 guitar_standard = [:e2, :a2, :d3, :g3, :b3, :e4]
 
 # Return ring representing the chord chrd, as played on a guitar with given tuning
-define :guitar do |tonic, name, tuning=guitar_standard|
+define :guitar do |tonic, name=:M, tuning=guitar_standard|
+  # Next note higher or equal to base note n, that is in the chord c
+  def next_note(n, c)
+    # Make sure n is a number
+    n = note(n)
+    # Get distances to each note in chord, add smallest to base note
+    n + (c.map {|x| (note(x) - n) % 12}).min
+  end
+
   chrd = (chord tonic, name)
   # For each string, get the next higher note that is in the chord
   c = tuning.map {|n| next_note(n, chrd)}.ring
@@ -38,32 +38,5 @@ end
 define :strum do |c, d=0.1|
   in_thread do
     play_pattern_timed c.drop_while{|n| [nil,:r].include? n}, d
-  end
-end
-
-use_debug false
-use_bpm 120
-
-live_loop :guit do
-  #chords = ring((guitar :d, :m7), (guitar :g, '7'), (guitar :c, :M7), (guitar :f, :M7),
-  #              (guitar :b, :m7), (guitar :e, '7'), (guitar :a, :m7))
-  chords = ring((guitar :a, :m), (guitar :c, :M), (guitar :d, :M), (ring :r, :r, 53, 57, 60, 65),
-                (guitar :a, :m), (guitar :c, :M), (guitar :e, :M), (guitar :e, '7'))
-  with_fx :reverb do
-    with_fx :lpf, cutoff: 115 do
-      with_synth :pluck do
-        tick
-        "D.DU.UDU".split(//).each do |s|
-          if s == 'D' # Down stroke
-            strum chords.look, 0.05
-          elsif s == 'U' # Up stroke
-            with_fx :level, amp: 0.5 do
-              strum chords.look.reverse, 0.03
-            end
-          end
-          sleep 0.5
-        end
-      end
-    end
   end
 end
