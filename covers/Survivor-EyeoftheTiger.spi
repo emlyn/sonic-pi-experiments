@@ -1,95 +1,67 @@
-# -*- mode: ruby;-*-
+# -*- mode: ruby; -*-
 # Eye of the Tiger - Survivor
-use_bpm 108
+use_debug false
+use_bpm 102
 
-with_fx :reverb, room: 0.9, amp: 1 do
-
+with_fx :reverb, room: 0.8, amp: 1 do
+  
   at 0 do
     use_synth :pluck
-    with_fx :compressor, lpf: 70, amp: 1, slide: 8 do |fx|
+    with_fx :compressor, lpf: 70, amp: 0.5, slide: 8 do |fx|
       control fx, amp: 2
-      160.times do
+      176.times do
         amps = (ring 1, 0.5, 0.5, 0.5, 0.75, 0.5, 0.5, 0.5)
         play :C2, attack: 0.05, release: 0.4, amp: amps.tick
         sleep 0.25
       end
     end
   end
-
-  at 0 do
-    sample :drum_cymbal_open, rate: -0.4, amp: 3
+  
+  at 6 do
+    sample :drum_cymbal_open, beat_stretch: 10, rate: -1, amp: 2
   end
-
-  live_loop :bamloop do
+  
+  live_loop :gobam, auto_cue: false do
     sync :bam
     sample :bd_haus, amp: 2
   end
-
+  
   define :bam do
+    # Trigger drum outside of the distort fx
     cue :bam
   end
-
-
-  at 8 do
+  
+  
+  at 16 do
     use_synth :fm
     use_synth_defaults amp: 2
-    with_fx :distortion, distort: 0.9 do
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 2
+    with_fx :distortion, distort: 0.7 do
       2.times do
         bam
         play [:C4, :Eb4, :G4, :C5], release: 0.5
-        sleep 0.75
-        bam
-        play [:Bb3, :D4, :F4, :Bb4], release: 0.5
-        sleep 0.75
+        sleep 2
+        2.times do
+          bam
+          play [:C4, :Eb4, :G4, :C5], release: 0.5
+          sleep 0.75
+          bam
+          play [:Bb3, :D4, :F4, :Bb4], release: 0.5
+          sleep 0.75
+          bam
+          play [:C4, :Eb4, :G4, :C5], release: 0.5
+          sleep 2
+        end
         bam
         play [:C4, :Eb4, :G4, :C5], release: 0.5
-        sleep 2
+        sleep 0.75
+        bam
+        play [:G3, :Bb3, :Eb4, :G4], release: 0.5
+        sleep 0.75
+        bam
+        play [:Ab3, :C4, :Eb4, :Ab4], release: 4.5
+        sleep 4.5
       end
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 0.75
-      bam
-      play [:G3, :Bb3, :Eb4, :G4], release: 0.5
-      sleep 0.75
-      bam
-      play [:Ab3, :C4, :Eb4, :Ab4], release: 4.5
-      sleep 4.5
-
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 2
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 0.75
-      bam
-      play [:Bb3, :D4, :F4, :Bb4], release: 0.5
-      sleep 0.75
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 3
-
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 0.75
-      bam
-      play [:Bb3, :D4, :F4, :Bb4], release: 0.5
-      sleep 0.75
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 2
-
-      bam
-      play [:C4, :Eb4, :G4, :C5], release: 0.5
-      sleep 0.75
-      bam
-      play [:G3, :Bb3, :Eb4, :G4], release: 0.5
-      sleep 0.75
-      bam
-      play [:Ab3, :C4, :Eb4, :Ab4], release: 4.5
-      sleep 4.5
     end
   end
 end
+
