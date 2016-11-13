@@ -5,11 +5,10 @@
 mypath = "/Users/emlyn/dev/personal/sonic-pi-experiments"
 
 #Load any snippets in the snippets subdirectory
-load_snippets mypath + "/snippets"
+load_snippets mypath + "/snippets", true
 
 # Run all files in the helpers subdirectory
 Dir.glob(mypath + "/helpers/**/*.{spi,rb}").each do |path|
-  puts "Loading file #{path}"
   run_file path
 end
 
