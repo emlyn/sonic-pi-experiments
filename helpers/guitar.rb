@@ -6,11 +6,13 @@
 # Feel free to make use of this code as you like (with attribution if you feel like it, but you don't have to).
 # Thanks to @Project_Hell_CK for fixing the tuning, and spotting that it gets chord(:f, :major) not quite right.
 
-ukulele_standard = [:g, :c, :e, :a]
-guitar_standard = [:e2, :a2, :d3, :g3, :b3, :e4]
-
 # Return ring representing the chord chrd, as played on a guitar with given tuning
-define :guitar do |tonic, name=:M, tuning=guitar_standard|
+def guitar(tonic, name: :M, tuning: :guitar, debug: false)
+  tunings = {
+    :ukulele => [:g, :c, :e, :a],
+    :guitar => [:e2, :a2, :d3, :g3, :b3, :e4]
+  }
+  tuning = tunings[tuning] || tuning
   # Next note higher or equal to base note n, that is in the chord c
   def next_note(n, c)
     # Make sure n is a number
@@ -19,7 +21,11 @@ define :guitar do |tonic, name=:M, tuning=guitar_standard|
     n + (c.map {|x| (note(x) - n) % 12}).min
   end
 
-  chrd = (chord tonic, name)
+  if tonic.respond_to?(:each) and name==nil then
+    chrd = tonic
+  else
+    chrd = (chord tonic, name)
+  end
   # For each string, get the next higher note that is in the chord
   c = tuning.map {|n| next_note(n, chrd)}.ring
   # We want the lowest note to be the root of the chord
@@ -30,13 +36,43 @@ define :guitar do |tonic, name=:M, tuning=guitar_standard|
     c = (ring :r) * first_root + c.drop(first_root)
   end
   # Display chord fingering
-  #puts c.zip(tuning).map {|n, s| if n == :r then 'x' else (n - note(s)) end}.join, c
+  if debug
+    puts c.zip(tuning).map {|n, s| if n == :r then 'x' else (n - note(s)) end}.join, c
+  end
   c
 end
 
 # Strum a chord with a certain delay between strings
-define :strum do |c, d=0.1|
+def guitar_strum(chrd, dt)
   in_thread do
-    play_pattern_timed c.drop_while{|n| [nil,:r].include? n}, d
+    play_pattern_timed chrd.drop_while{|n| [nil,:r].include? n}, dt
+  end
+end
+
+def strum(chrd, pattern=nil, t: 0.25, dt: 0.025)
+  if pattern == nil then
+    guitar_strum(chord, dt)
+  else
+    pattern.split(//).each do |shape|
+      case shape
+      when 'D'
+        guitar_strum chrd, dt
+      when 'd'
+        with_fx :level, amp: 0.7 do
+          guitar_strum chrd, dt
+        end
+      when 'U'
+        with_fx :level, amp: 0.8 do
+          guitar_strum chrd.reverse, dt*0.9
+        end
+      when 'u'
+        with_fx :level, amp: 0.6 do
+          guitar_strum chrd.reverse, dt*0.9
+        end
+      else
+        # nothing
+      end
+      sleep t
+    end
   end
 end

@@ -3,7 +3,7 @@
 # A bit like play_pattern_timed, but the durations are interspersed with the notes,
 # so that it's easier to match the notes and durations, and it can also slide/slur between notes.
 
-define :pl do |notes, sus=0.5, rel=nil|
+def pl(notes, sus: 0.5, rel: nil)
   rel ||= 1 - sus
   notes.each_slice(2) do |n,d|
     if d.respond_to?(:each) then # slur

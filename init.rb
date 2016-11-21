@@ -13,7 +13,7 @@ Dir.glob(mypath + "/helpers/**/*.{spi,rb}").each do |path|
 end
 
 # Load a file from my sonic-pi-experiments repo, match can be string/regex
-define :load do |match, index=nil, path=mypath|
+define :load do |match='/', index=nil, path=mypath|
   path = path.end_with?('/') ? path : path + '/'
   files = Dir.glob(path + "**/*.{spi,rb}").map {|p| p.slice(path.length..-1)}
   candidates = files.select {|p| p.index(match)}
