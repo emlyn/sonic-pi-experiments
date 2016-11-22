@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 # Smoke on the Water - Deep Purple
 # Uses the play_helper and sequencer helpers
 
@@ -59,10 +58,10 @@ end
 define :lead_intro do # 4 bars
   sus=0.8
   rel=0.15
-  pl [[:D, :G], 1, [:F, :Bb], 1, [:G, :C5], 1, :r, 0.5], sus, rel
-  pl [[:D, :G], 1, [:F, :Bb], 1, [:Ab, :Db5], 0.5, [:G, :C5], 1.5, :r, 0.5], sus, rel
-  pl [[:D, :G], 1, [:F, :Bb], 1, [:G, :C5], 1, :r, 0.5], sus, rel
-  pl [[:F, :Bb], 1, [:D, :G], 1.5, :r, 2], sus, rel
+  pl [[:D, :G], 1, [:F, :Bb], 1, [:G, :C5], 1, :r, 0.5], sus: sus, rel: rel
+  pl [[:D, :G], 1, [:F, :Bb], 1, [:Ab, :Db5], 0.5, [:G, :C5], 1.5, :r, 0.5], sus: sus, rel: rel
+  pl [[:D, :G], 1, [:F, :Bb], 1, [:G, :C5], 1, :r, 0.5], sus: sus, rel: rel
+  pl [[:F, :Bb], 1, [:D, :G], 1.5, :r, 2], sus: sus, rel: rel
 end
 
 define :lead_verse do
@@ -148,7 +147,7 @@ define :bass do # 1.5 beats upbeat
   2.times do
     pl [[:G2, :G3], 0.5, :G2, 0.5, :G3, 0.5, :G2, 0.5, :G2, 0.5, :G2, 0.5, :G3, 0.5, :G2, 0.5]
     pl [:G2, 0.5, :G2, 0.5, :G3, 0.5, :G2, 0.5, :G2, 0.5, :G3, 0.5, :F2, 0.5, :G3, 0.5]
-    pl [:G2, 0.5, :G2, 0.5, :G3, 0.5, :G2, 0.5, :C3, 0.5, :C4, 0.4, :C3, 0.5, :Bb3, 0.5]
+    pl [:G2, 0.5, :G2, 0.5, :G3, 0.5, :G2, 0.5, :C3, 0.5, :C4, 0.5, :C3, 0.5, :Bb3, 0.5]
     pl [:Bb2, 0.5, :G3, 0.5, :G2, 0.5, :G3, 0.5, :G2, 0.5, :G2, 0.5, :G3, 0.5, :G2, 0.5]
   end
 end
