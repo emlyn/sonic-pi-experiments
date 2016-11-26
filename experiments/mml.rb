@@ -1,4 +1,4 @@
-# Before running this file, first run helpers/mml.spi to load the mml function
+# Before running this file, first run helpers/mml.rb to load the mml function
 
 use_debug false
 use_synth :pulse

@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 use_debug false
 
 live_loop :vib do

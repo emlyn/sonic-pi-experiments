@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 use_debug false
 use_bpm 82
 

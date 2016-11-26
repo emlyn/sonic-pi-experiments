@@ -24,31 +24,31 @@ into helpers so that I can easily access them later.
 My Sonic Pi experiments. If something becomes useful enough to be moved into helpers
 I'll leave the examples that use the helper in here.
 
-## [Guitar](/experiments/guitar.spi)
+## [Guitar](/experiments/guitar.rb)
 
 Programmatically generate guitar chords and strum them.
 
-## [Drum Machine](/experiments/drum_machine.spi) / [Sequencer](/experiments/sequencer.spi)
+## [Drum Machine](/experiments/drum_machine.rb) / [Sequencer](/experiments/sequencer.rb)
 
 Drum sequencer (first attempt, and second more general version).
 
-## [Arpeggiator](/experiments/arpeggiator.spi)
+## [Arpeggiator](/experiments/arpeggiator.rb)
 
 Arpeggiator inspired by [this](http://codepen.io/jakealbaugh/full/qNrZyw/).
 
-## [Vibrato](/experiments/vibrato.spi)
+## [Vibrato](/experiments/vibrato.rb)
 
 Attempt to apply vibrato to a note.
 
-## [MML](/experiments/mml.spi)
+## [MML](/experiments/mml.rb)
 
 MML (Music Macro Language) interpreter and player, with some MML for Tetris, Mario and the Star Wars Cantina song.
 
-## [Scope](/experiments/scope.spi) / [Lissajous](/experiments/lissajous.spi)
+## [Scope](/experiments/scope.rb) / [Lissajous](/experiments/lissajous.rb)
 
 Making Lissajous figures with the new scope in SP 2.11.
 
-## [Play Helper](/experiments/play-helper.spi)
+## [Play Helper](/experiments/play-helper.rb)
 
 Make it easier to play sequences of notes/chords of varying durations.
 

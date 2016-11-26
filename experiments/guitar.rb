@@ -1,6 +1,4 @@
-# -*- mode: ruby;-*-
-
-# Before running this file, first run helpers/guitar.spi to load the guitar and strum functions
+# Before running this file, first run helpers/guitar.rb to load the guitar and strum functions
 
 use_debug false
 use_bpm 120

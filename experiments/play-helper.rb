@@ -1,6 +1,4 @@
-# -*- mode: ruby;-*-
-
-# Before running this file, first run helpers/play_helper.spi to load the pl function
+# Before running this file, first run helpers/play_helper.rb to load the pl function
 
 use_bpm 90
 

@@ -1,6 +1,4 @@
-# -*- mode: ruby;-*-
-
-# Before running this file, first run helpers/sequencer.spi to load the seq function
+# Before running this file, first run helpers/sequencer.rb to load the seq function
 
 use_bpm 110
 

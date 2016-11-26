@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 use_random_seed 123
 
 use_synth_defaults attack: 0.1, sustain: 60, release: 0.5, amp: 3

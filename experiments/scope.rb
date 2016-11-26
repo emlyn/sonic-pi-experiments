@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 # Requires Sonic Pi 2.11+
 # Open the scope window if not already open
 # Make sure the Lissajous option is enabled in Prefs:Scope

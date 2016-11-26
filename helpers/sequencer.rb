@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 # Drum sequencer
 # Pass it pairs of samples and patterns (string) and a tick duration.
 # A space or dot in the pattern represents a rest, and a star plays

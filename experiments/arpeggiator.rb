@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 use_debug false
 use_synth :fm
 use_bpm 70

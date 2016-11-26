@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 # Helper for playing tunes more easily.
 # A bit like play_pattern_timed, but the durations are interspersed with the notes,
 # so that it's easier to match the notes and durations, and it can also slide/slur between notes.

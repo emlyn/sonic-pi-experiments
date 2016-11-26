@@ -1,4 +1,3 @@
-# -*- mode: ruby;-*-
 # Guitar Strumming - by Emlyn
 # This tries to work out the guitar (or ukulele etc.) fingering for arbitrary chords (and tuning).
 # It seems to work reasonably well for basic chords, but is quite naive and probably makes many mistakes.
