@@ -167,9 +167,9 @@ define :verse1 do # 16 bars, plus a half-beat upbeat
   puts "Frank Zappa and the Mothers"
   pl [:G5, 1, :G5, 0.5, :F5, 0.5, :G5, 0.5, :F5, 0.5, :G5, 1, :G5, 1.5, :r, 1]
   puts "Were at the best place around"
-  pl [:Bb4, 0.5, :C5, 0.5, :Bb4, 0.5, :Db5, 1, :C5, 1, [:Bb4, :D5, :Db5, :D5], [0.5, 0.125, 0.125, 1.25], :r, 3.25]
+  pl [:Bb4, 0.5, :C5, 0.5, :Bb4, 0.5, :Db5, 1, :C5, 1, [:Bb4, :D5, :Db5, :D5], [0.5, 0.125, 0.125, 1.25], :r, 3.5]
   puts "But some stupid with a flare gun"
-  pl [:D5, 0.5, :F5, 1, :F5, 0.5, :D5, 0.5, :F5, 0.5, :D5, 0.5, :F5, 1, :G5, 1, :r, 2]
+  pl [:D5, 0.5, :F5, 1, :F5, 0.5, :D5, 0.5, :F5, 0.5, :D5, 0.375, :r, 0.125, :F5, 1, :G5, 1, :r, 2]
   puts "Burned the place to the ground"
   pl [:F5, 0.5, :D5, 0.5, :D5, 1, :C5, 0.5, :D5, 1, [:Bb4, :G4], [0.25, 1.25], :r, 3]
 end
