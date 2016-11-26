@@ -1,9 +1,10 @@
 # key: waves
-# point_line: 10
+# point_line: 11
 # point_index: 0
 # --
 with_fx :reverb, room: 0.95, mix: 0.5, lpf: 120, amp: 1, slide: 2 do |fx|
   live_loop :waves, auto_cue: false do
+    use_debug false
     a = 1
     s = [:noise, :pnoise, :gnoise, :bnoise, :cnoise].choose
     synth s, amp: rrand(a/4.0, a), cutoff: rrand(60, 110), pan: rrand(-1,1), slide: rrand(1,3),
