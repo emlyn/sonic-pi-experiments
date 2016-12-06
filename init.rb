@@ -15,6 +15,9 @@ end
 # Load a file from my sonic-pi-experiments repo, match can be string/regex
 define :load do |match='/', index=nil, path=mypath|
   path = path.end_with?('/') ? path : path + '/'
+  if match.is_a?(Symbol)
+    match = Regexp.new(Regexp.escape(match.to_s), Regexp::IGNORECASE)
+  end
   files = Dir.glob(path + "**/*.{spi,rb}").map {|p| p.slice(path.length..-1)}
   candidates = files.select {|p| p.index(match)}
   case candidates.length
