@@ -6,10 +6,8 @@ use_bpm 110
 
 #### Some helper functions
 
-define :bar do |n|
-  # beat time at start of bar n
-  return 4 * n
-end
+# beat time at start of bar n
+define :bar do |n| return 4 * n end
 
 #### Define the different drum beats
 
@@ -155,7 +153,7 @@ end
 #### And the vocals
 
 define :verse1 do # 16 bars, plus a half-beat upbeat
-  lyrics "We all came down to Montreux"
+  lyrics "We all came out to Montreux"
   pl [:F5, 0.5, :G5, 1, :G5, 1, :F5, 1, :D5, 0.5, :F5, 1, :D5, 1.5, :r, 1]
   lyrics "On the Lake Geneva shoreline"
   pl [:C5, 0.5, :Bb4, 0.5, [:Db5, :C5], [0.25, 0.75], :Bb4, 0.5, :C5, 1.5, :D5, 0.5]
@@ -186,16 +184,18 @@ end
 #### Now let's put it all together (only 1 verse):
 # bar 0: start intro
 # bar 8: drums start
-# bar 16: bass starts, drums beat2
+# bar 12: drums beat2
+# bar 16: bass starts
 # bar 24: verse 1
 # bar 40: chorus
 # bar 46: outro
 # bar 54: end
 
+use_synth :fm
+
 with_fx :reverb, room: 0.8, slide: 3 do |fx|
   
   at bar(0) do
-    use_synth :fm
     with_fx :distortion, distort: 0.9 do
       6.times do
         lead_intro
@@ -210,11 +210,11 @@ with_fx :reverb, room: 0.8, slide: 3 do |fx|
   
   at bar(8) do
     with_fx :level, amp: 1.5 do |f|
-      8.times do
+      4.times do
         beat1
       end
       control f, level: 3
-      7.times do
+      11.times do
         beat2
       end
       beat3
@@ -228,7 +228,6 @@ with_fx :reverb, room: 0.8, slide: 3 do |fx|
   end
   
   at bar(16) - 1.5 do
-    use_synth :fm
     use_synth_defaults cutoff: 70, amp: 1.5
     with_fx :distortion, distort: 0.7 do
       bass
@@ -236,14 +235,12 @@ with_fx :reverb, room: 0.8, slide: 3 do |fx|
   end
   
   at bar(24) do
-    use_synth :fm
     use_synth_defaults amp: 1.5
     lead_verse
     lead_chorus
   end
   
   at bar(24) - 0.5 do
-    use_synth :fm
     use_synth_defaults depth: 2, slide: 0.02, amp: 1.5
     verse1
     chorus
