@@ -1,5 +1,5 @@
 # Wonderwall - Oasis
-# uses play_helper and guitar helpers
+# uses play_helper, guitar and lyric helpers
 
 use_debug false
 use_bpm 68
@@ -10,19 +10,19 @@ with_fx :reverb, room: 0.9 do
     use_synth :fm
     use_synth_defaults attack: 0.05, slide: 0.025, depth: 1.5
     with_fx :distortion, amp: 0.5 do
-      puts "Today is gonna be the day that they're"
+      lyrics "Today is gonna be the day that they're"
       pl [:r, 0.5, :B4, 0.5, :A4, 0.75, :G4, 0.25, [:A4, :G4], [0.25, 0.25], :A4, 0.25, :G4, 0.25, :A4, 0.5, :A4, 0.25, :G4, 0.25]
-      puts "gonna throw it back to you."
+      lyrics "gonna throw it back to you."
       pl [[:A4, :G4], [0.25, 0.25], :A4, 0.25, :G4, 0.25, :A4, 0.5, :B4, 0.25, :G4, 1.25, :r, 1]
-      puts "By now you should've some how"
+      lyrics "By now you should've some how"
       pl [:r, 0.5, :B4, 0.5, :A4, 0.75, :G4, 0.25, :A4, 0.25, :G4, 0.25, :A4, 0.5, :A4, 0.5]
-      puts "realised what you gotta do."
+      lyrics "realised what you gotta do."
       pl [[:A4, :G4], [0.25, 0.25], :A4, 0.5, :A4, 0.25, :G4, 0.25, [:A4, :B4], [0.5, 0.25], :G4, 1.5, :r, 1]
-      puts "I don't believe that anybody"
+      lyrics "I don't believe that anybody"
       pl [:B4, 0.25, :D5, 0.25, [:B4, :D5], [0.25, 0.75], :D5, 0.25, :E5, 0.75, :D5, 0.25, :A4, 0.5, :G4, 0.75]
-      puts "feels the way I do"
+      lyrics "feels the way I do"
       pl [:A4, 0.75, :A4, 0.25, [:A4, :B4], [0.25, 0.5], :G4, 1]
-      puts "about you now"
+      lyrics "about you now"
       pl [:E4, 0.25, :E4, 0.5, :E4, 0.25, [:G4, :E4], [0.5, 1.75], :r, 5.5]
     end
   end

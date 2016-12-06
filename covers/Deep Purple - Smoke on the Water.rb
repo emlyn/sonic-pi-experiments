@@ -1,5 +1,5 @@
 # Smoke on the Water - Deep Purple
-# Uses the play_helper and sequencer helpers
+# Uses the play_helper, sequencer and lyric helpers
 
 use_debug false
 use_bpm 110
@@ -155,31 +155,31 @@ end
 #### And the vocals
 
 define :verse1 do # 16 bars, plus a half-beat upbeat
-  puts "We all came down to Montreux"
+  lyrics "We all came down to Montreux"
   pl [:F5, 0.5, :G5, 1, :G5, 1, :F5, 1, :D5, 0.5, :F5, 1, :D5, 1.5, :r, 1]
-  puts "On the Lake Geneva shoreline"
+  lyrics "On the Lake Geneva shoreline"
   pl [:C5, 0.5, :Bb4, 0.5, [:Db5, :C5], [0.25, 0.75], :Bb4, 0.5, :C5, 1.5, :D5, 0.5]
   pl [[:Bb4, :G4], [0.5, 0.5], :G4, 1, :r, 3]
-  puts "To make records with the mobile"
+  lyrics "To make records with the mobile"
   pl [:F5, 0.5, :F5, 1, :F5, 0.5, :D5, 0.5, :F5, 0.5, :D5, 0.5, :G5, 1, :D5, 1, :r, 4.5]
-  puts "We didn't have much time"
+  lyrics "We didn't have much time"
   pl [:Db5, 0.5, :C5, 0.5, :Bb4, 0.5, :Db5, 0.5, :Db5, 1, :G4, 1, :r, 2.5]
-  puts "Frank Zappa and the Mothers"
+  lyrics "Frank Zappa and the Mothers"
   pl [:G5, 1, :G5, 0.5, :F5, 0.5, :G5, 0.5, :F5, 0.5, :G5, 1, :G5, 1.5, :r, 1]
-  puts "Were at the best place around"
+  lyrics "Were at the best place around"
   pl [:Bb4, 0.5, :C5, 0.5, :Bb4, 0.5, :Db5, 1, :C5, 1, [:Bb4, :D5, :Db5, :D5], [0.5, 0.125, 0.125, 1.25], :r, 3.5]
-  puts "But some stupid with a flare gun"
+  lyrics "But some stupid with a flare gun"
   pl [:D5, 0.5, :F5, 1, :F5, 0.5, :D5, 0.5, :F5, 0.5, :D5, 0.375, :r, 0.125, :F5, 1, :G5, 1, :r, 2]
-  puts "Burned the place to the ground"
+  lyrics "Burned the place to the ground"
   pl [:F5, 0.5, :D5, 0.5, :D5, 1, :C5, 0.5, :D5, 1, [:Bb4, :G4], [0.25, 1.25], :r, 3]
 end
 
 define :chorus do # 6 bars
-  puts "Smoke on the water"
+  lyrics "Smoke on the water"
   pl [[:G4, :E5], 3, [:F4, :D5], 0.5, [:E4, :C5], 0.5, [:Gb4, :Eb5], 2, [:E4, :C5], 1.5, :r, 1]
-  puts "And fire in the sky"
+  lyrics "And fire in the sky"
   pl [:G4, 0.5, [:Bb4, :G4], [0.5, 0.5], :Bb4, 0.5, :G4, 0.5, [:F4, :G4], [0.5, 0.5], :r, 4]
-  puts "Smoke on the water"
+  lyrics "Smoke on the water"
   pl [[:G4, :E5], 3, [:F4, :D5], 0.5, [:E4, :C5], 0.5, [:Gb4, :Eb5], 2, [:E4, :C5], 1.5, :r, 0.5]
 end
 

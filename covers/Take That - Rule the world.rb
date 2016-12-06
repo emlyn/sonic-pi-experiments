@@ -1,3 +1,6 @@
+# Rule The World - Take That
+# Uses the play_helper and lyric helpers
+
 use_debug false
 use_bpm 82
 
@@ -10,42 +13,42 @@ at 0 do
   use_synth :fm
   use_synth_defaults attack: 0.0625, slide: 0.0625, depth: 1.5
   with_fx :reverb do
-    puts "You light"
+    lyrics "You light"
     pl [:Fs3,  0.5, :B3, 3.5]
-    puts "the skies"
+    lyrics "the skies"
     pl [:Fs3, 0.5, :Cs4, 2.5]
-    puts "up above me;"
+    lyrics "up above me;"
     pl [:Fs3, 1, :A3, 0.5, [:Fs3, :E3], [0.125, 0.875], :E3, 1.5, :r, 5.5]
-    puts "a star"
+    lyrics "a star"
     pl [:Fs3, 0.5, :B3, 3.5]
-    puts "so bright"
+    lyrics "so bright"
     pl [:D4, 0.5, :E4, 3.5]
-    puts "you blind me,"
+    lyrics "you blind me,"
     pl [:D4, 0.5, [:Cs4, :B3], [0.1875, 0.8125], :B3, 3]
-    puts "yeah, yeah."
+    lyrics "yeah, yeah."
     pl [[:A3, :B3, :Fs3], [0.325, 0.175, 2], :r, 1]
-    puts "Don't close"
+    lyrics "Don't close"
     pl [:B3, 0.5, :E4, 3.5]
-    puts "your eyes;"
+    lyrics "your eyes;"
     pl [:B3, 0.5, :D4, 2]
-    puts "don't fade away,"
+    lyrics "don't fade away,"
     pl [:B3, 0.5, [:G4, :Fs4], [0.5, 0.5], :Fs4, 0.5, :Cs4, 2]
-    puts "don't fade away,"
+    lyrics "don't fade away,"
     pl [:B3, 0.5, [:G4, :Fs4], [0.5, 0.5], :Fs4, 0.5, :E4, 1.5, :r, 0.5]
-    puts "oh."
+    lyrics "oh."
     pl [[:G4, :Fs4], [1, 1.5], :r, 0.5]
-    puts "Yeah, you and me, we can ride on a star;"
+    lyrics "Yeah, you and me, we can ride on a star;"
     pl [:Fs4, 0.5]*6 + [:Fs4, 1, :G4, 0.5, :Fs4, 0.5, :Cs4, 1]
-    puts "if you stay with me, girl,"
+    lyrics "if you stay with me, girl,"
     pl [:Cs4, 0.5, :Cs4, 0.5, :Cs4, 1, :D, 0.5, :Cs4, 0.5, :B3, 1]
-    puts "we can rule the world."
+    lyrics "we can rule the world."
     pl [:Fs4, 0.5, :Fs4, 0.5, [:Fs4, :E4], [0.5, 0.5], :E4, 1]
     pl [[:G4, :Fs4], [1, 0.5], :r, 1.5], 0.8
-    puts "Yeah, you and me, we can light up the sky;"
+    lyrics "Yeah, you and me, we can light up the sky;"
     pl [:Fs4, 0.5]*6 + [:Fs4, 1, :G4, 0.5, :Fs4, 0.5, :Cs4, 1]
-    puts "if you stay by my side,"
+    lyrics "if you stay by my side,"
     pl [:Cs4, 0.5, :Cs4, 0.5, :Cs4, 1, :D, 0.5, :Cs4, 0.5, :B3, 1]
-    puts "we can rule the world."
+    lyrics "we can rule the world."
     pl [:Fs4, 0.5, :Fs4, 0.5, [:Fs4, :E4], [0.5, 0.5], :E4, 1]
     pl [[:G4, :Fs4], [1, 0.5]], 0.8
   end
