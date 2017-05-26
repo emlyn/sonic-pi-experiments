@@ -2,7 +2,7 @@
 # Code in here will be evaluated on launch.
 # Linked to from ~/.sonic-pi/init.rb
 
-mypath = "/Users/emlyn/dev/personal/sonic-pi-experiments"
+mypath = File.expand_path "~/dev/personal/sonic-pi-experiments"
 
 #Load any snippets in the snippets subdirectory
 load_snippets mypath + "/snippets", true
@@ -15,8 +15,11 @@ end
 # Load a file from my sonic-pi-experiments repo, match can be string/regex
 define :load do |match='/', index=nil, path=mypath|
   path = path.end_with?('/') ? path : path + '/'
-  if match.is_a?(Symbol)
+  if match.is_a? Symbol
     match = Regexp.new(Regexp.escape(match.to_s), Regexp::IGNORECASE)
+  elsif match.is_a? Numeric
+    index = match
+    match = '/'
   end
   files = Dir.glob(path + "**/*.{spi,rb}").map {|p| p.slice(path.length..-1)}
   candidates = files.select {|p| p.index(match)}
