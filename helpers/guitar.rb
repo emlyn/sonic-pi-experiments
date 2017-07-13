@@ -36,7 +36,7 @@ def guitar(tonic, name: :M, tuning: :guitar, debug: false)
   end
   # Display chord fingering
   if debug
-    puts c.zip(tuning).map {|n, s| if n == :r then 'x' else (n - note(s)) end}.join, c
+    puts c.zip(tuning).map {|n, s| if n == :r then 'x' else (n - note(s)) end}.to_a.join, c
   end
   c
 end
@@ -50,7 +50,7 @@ end
 
 def strum(chrd, pattern=nil, t: 0.25, dt: 0.025)
   if pattern == nil then
-    guitar_strum(chord, dt)
+    guitar_strum(chrd, dt)
   else
     pattern.split(//).each do |shape|
       case shape
