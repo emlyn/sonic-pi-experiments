@@ -37,11 +37,11 @@ define :mml do |txt, vol_scale=100|
         n += a + octave.to_s
       end
       t = (if dot.empty? then 4.0 else 6.0 end) / (if num.empty? then length else num.to_i end)
-      loop do
-        r = txt.scan(/^(\^|&[a-gr][+-]?)(\d*)(\.?)(.*)$/)
-        if r.empty? then break end
+      r = txt.scan(/^(\^|&[a-gr][+-]?)(\d*)(\.?)(.*)$/)
+      while not r.empty?
         cmd, num, dot, txt = r[0]
         t += (if dot.empty? then 4.0 else 6.0 end) / (if num.empty? then length else num.to_i end)
+        r = txt.scan(/^(\^|&[a-gr][+-]?)(\d*)(\.?)(.*)$/)
       end
       play_pattern_timed [n.to_sym], [t], release: t
     when 'n'
