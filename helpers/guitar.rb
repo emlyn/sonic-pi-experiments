@@ -6,7 +6,7 @@
 # Thanks to @Project_Hell_CK for fixing the tuning, and spotting that it gets chord(:f, :major) not quite right.
 
 # Return ring representing the chord chrd, as played on a guitar with given tuning
-def guitar(tonic, name: :M, tuning: :guitar, debug: false)
+def guitar(tonic, name=:M, tuning: :guitar, debug: false)
   tunings = {
     :ukulele => [:g, :c, :e, :a],
     :guitar => [:e2, :a2, :d3, :g3, :b3, :e4]
@@ -48,7 +48,7 @@ def guitar_strum(chrd, dt)
   end
 end
 
-def strum(chrd, pattern=nil, t: 0.25, dt: 0.025)
+def strum(chrd, pattern: nil, t: 0.25, dt: 0.025)
   if pattern == nil then
     guitar_strum(chrd, dt)
   else

@@ -14,10 +14,10 @@ live_loop :guit do
         tick
         "D.DU.UDU".split(//).each do |s|
           if s == 'D' # Down stroke
-            strum chords.look, 0.05
+            strum chords.look, t: 0.05
           elsif s == 'U' # Up stroke
             with_fx :level, amp: 0.5 do
-              strum chords.look.reverse, 0.03
+              strum chords.look.reverse, t: 0.03
             end
           end
           sleep 0.5
