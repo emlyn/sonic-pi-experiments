@@ -6,12 +6,13 @@
 # Thanks to @Project_Hell_CK for fixing the tuning, and spotting that it gets chord(:f, :major) not quite right.
 
 # Return ring representing the chord chrd, as played on a guitar with given tuning
-def guitar(tonic, name=:M, tuning: :guitar, debug: false)
+def guitar(tonic, name=nil, tuning: :guitar, debug: false)
   tunings = {
     :ukulele => [:g, :c, :e, :a],
     :guitar => [:e2, :a2, :d3, :g3, :b3, :e4]
   }
   tuning = tunings[tuning] || tuning
+
   # Next note higher or equal to base note n, that is in the chord c
   def next_note(n, c)
     # Make sure n is a number
@@ -23,17 +24,21 @@ def guitar(tonic, name=:M, tuning: :guitar, debug: false)
   if tonic.respond_to?(:each) and name==nil then
     chrd = tonic
   else
-    chrd = (chord tonic, name)
+    chrd = (chord tonic, name || :M)
   end
+
   # For each string, get the next higher note that is in the chord
   c = tuning.map {|n| next_note(n, chrd)}.ring
+
   # We want the lowest note to be the root of the chord
   root = note(chrd[0])
   first_root = c.take_while {|n| (n - root) % 12 != 0}.count
+
   # Drop up to half the lowest strings to make that the case if possible
   if first_root > 0 and first_root < tuning.count / 2
     c = (ring :r) * first_root + c.drop(first_root)
   end
+
   # Display chord fingering
   if debug
     puts c.zip(tuning).map {|n, s| if n == :r then 'x' else (n - note(s)) end}.to_a.join, c
