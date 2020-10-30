@@ -28,7 +28,7 @@ def guitar(tonic, name=nil, tuning: :guitar, debug: false)
   end
 
   # For each string, get the next higher note that is in the chord
-  c = tuning.map {|n| next_note(n, chrd)}.ring
+  c = tuning.map {|n| next_note(n, chrd)}
 
   # We want the lowest note to be the root of the chord
   root = note(chrd[0])
